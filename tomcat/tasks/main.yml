@@ -1,0 +1,43 @@
+---
+   - name: updating packages
+     apt:
+       update_cache: true
+
+   - name: installing java
+     apt:
+        name: "{{ java_package }}"
+        state: latest
+
+   - name: installing tomcat server
+     get_url:
+         url: "{{ tomcat_url }}" 
+         dest: "{{ destini }}"
+
+   - name: extracting tar file
+     unarchive:
+          src: "{{ item }}"
+          dest: "{{ destini }}"
+          remote_src: yes
+     with_items:
+       - "{{ destini_path }}"
+   
+   - name: changing the port number
+     template:
+       src: template/server.xml.j2
+       dest: "{{ tomcat_path }}"
+
+   - name: enabling manager view
+     template:
+       src: template/context.xml.j2
+       dest: "{{  context_path }}"
+
+   - name: updating tomcat users .xml file
+     template:
+       src: template/tomcat-users.xml.j2
+       dest: "{{ tom_cat_users }}"
+
+   - name: starting tomat
+     shell: nohup "{{ destini }}"apache-tomcat-10.0.27/bin/shutdown.sh &
+
+   - name: starting tomat
+     shell: nohup "{{ destini }}"apache-tomcat-10.0.27/bin/startup.sh &

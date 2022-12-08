@@ -1,0 +1,14 @@
+---
+  java_package: default-jdk
+  tomcat_url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.tar.gz
+  destini: /opt/
+  destini_path: /opt/apache-tomcat-10.0.27.tar.gz
+  port_no: "8080"
+  tomcat_path: /opt/apache-tomcat-10.0.27/conf/server.xml
+  comment1: <!--
+  comment2: -->
+  context_path: /opt/apache-tomcat-10.0.27/webapps/manager/META-INF/context.xml
+  tom_cat_users: /opt/apache-tomcat-10.0.27/conf/tomcat-users.xml
+ 
+
+
